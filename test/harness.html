@@ -1,0 +1,22 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>IG Saver — botão</title>
+<style>
+  body { background: #111; display: grid; place-items: center; height: 100vh; margin: 0; }
+  .media { position: relative; width: 360px; height: 360px; background: #333; border-radius: 8px; }
+</style>
+<div class="media" id="media"></div>
+<script type="module">
+  import { createSaveButton } from "../src/ui/button.js";
+  const btn = createSaveButton({
+    onSave: () => cycle(),
+    onSaveAll: () => cycle("error"),
+  });
+  document.getElementById("media").append(btn.host);
+  btn.setVisible(true);
+  btn.setCount(2, 7);
+  function cycle(end = "done") {
+    btn.setState("loading");
+    setTimeout(() => btn.setState(end, end === "error" ? "Deu ruim aqui" : ""), 900);
+  }
+</script>
