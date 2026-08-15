@@ -20,6 +20,10 @@ const CSS = `
     padding: 4px 8px; border-radius: 999px;
     background: rgba(20,20,20,.72); color: #fff; backdrop-filter: blur(6px);
   }
+  .logo {
+    width: 22px; height: 22px; border-radius: 6px; display: block;
+    box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  }
   .hidden { display: none; }
   :host([data-state="loading"]) .icon { animation: spin .8s linear infinite; }
   :host([data-state="done"]) button.save { background: #1a9c4b; }
@@ -34,7 +38,7 @@ const ICONS = {
   error: `<svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 6v8"/><path d="M12 18h.01"/></svg>`,
 };
 
-export function createSaveButton({ onSave, onSaveAll }) {
+export function createSaveButton({ onSave, onSaveAll, logoUrl }) {
   const host = document.createElement("div");
   host.dataset.state = "idle";
   const root = host.attachShadow({ mode: "open" });
@@ -45,6 +49,7 @@ export function createSaveButton({ onSave, onSaveAll }) {
   const wrap = document.createElement("div");
   wrap.className = "wrap";
   wrap.innerHTML = `
+    ${logoUrl ? `<img class="logo" src="${logoUrl}" alt="SP3">` : ""}
     <span class="badge hidden"></span>
     <button class="all hidden" type="button">todos</button>
     <button class="save" type="button" title="Salvar">${ICONS.idle}</button>

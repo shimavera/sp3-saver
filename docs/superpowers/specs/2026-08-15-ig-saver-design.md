@@ -1,7 +1,14 @@
-# IG Saver — Design
+# SP3 Saver — Design
 
 Data: 2026-08-15
 Status: aprovado pelo Juan
+
+> **v0.2 (mesmo dia):** o projeto passou a se chamar SP3 Saver, ganhou o
+> símbolo da SP3 no botão e suporte à Biblioteca de Anúncios do Meta
+> (`facebook.com/ads/library`), onde um clique baixa o criativo visível.
+> Lá o `<video>` traz o arquivo direto no `src`, então não há endpoint
+> envolvido — a leitura da página basta. O resto do desenho abaixo
+> permanece válido.
 
 ## Objetivo
 

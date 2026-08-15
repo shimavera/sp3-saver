@@ -1,11 +1,18 @@
 {
   "manifest_version": 3,
-  "name": "IG Saver",
-  "version": "0.1.0",
-  "description": "Baixa foto, video, carrossel, story e destaque do Instagram com um clique.",
+  "name": "SP3 Saver",
+  "version": "0.2.0",
+  "description": "Baixa foto, video, carrossel, story e destaque do Instagram e criativos da Biblioteca de Anuncios do Meta com um clique.",
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
   "permissions": ["downloads"],
   "host_permissions": [
     "https://www.instagram.com/*",
+    "https://www.facebook.com/*",
     "https://*.cdninstagram.com/*",
     "https://*.fbcdn.net/*"
   ],
@@ -15,15 +22,22 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.instagram.com/*"],
+      "matches": ["https://www.instagram.com/*", "https://www.facebook.com/ads/library*"],
       "js": ["src/content.js"],
       "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["src/main.js", "src/resolver.js", "src/ui/button.js", "src/lib/*.js"],
-      "matches": ["https://www.instagram.com/*"]
+      "resources": [
+        "src/main.js",
+        "src/resolver.js",
+        "src/ui/button.js",
+        "src/lib/*.js",
+        "src/sites/*.js",
+        "assets/*.png"
+      ],
+      "matches": ["https://www.instagram.com/*", "https://www.facebook.com/*"]
     }
   ]
 }

@@ -14,6 +14,9 @@ Recarregar a extensão em `chrome://extensions` antes de começar.
 | 7 | Destaque | Abrir destaque, clicar | mídia no Downloads |
 | 8 | Avatar | Passar o mouse na foto de perfil, clicar | imagem do avatar no Downloads |
 | 9 | Erro visível | Desligar a rede e clicar | botão fica vermelho, tooltip com o motivo |
+| 10 | Anúncio em vídeo | Abrir a Biblioteca de Anúncios, clicar num card | `.mp4` do criativo no Downloads |
+| 11 | Anúncio em imagem | Card de anúncio com foto, clicar | imagem do criativo no Downloads |
+| 12 | Logo SP3 | Passar o mouse em qualquer mídia | símbolo azul da SP3 ao lado dos botões |
 
 ## Conferir que o endpoint ainda responde
 

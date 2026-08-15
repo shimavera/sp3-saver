@@ -16,6 +16,23 @@ export function shortcodeFromUrl(url) {
   return match ? match[1] : null;
 }
 
+const MAX_NOME = 64;
+
+// Nome final do arquivo salvo. Mantem o nome original do CDN quando ele existe
+// e e utilizavel; a Biblioteca de Anuncios serve nomes de 100+ caracteres, que
+// ficam encurtados. Sem nome na URL, a extensao vem do tipo da midia — chutar
+// .jpg em video salvaria um arquivo que o sistema nao abre.
+export function filenameFor(url, type, stamp = Date.now()) {
+  const original = filenameFromUrl(url);
+  if (!original) return `sp3_${stamp}.${type === "video" ? "mp4" : "jpg"}`;
+
+  if (original.length <= MAX_NOME) return original;
+
+  const ponto = original.lastIndexOf(".");
+  const extensao = original.slice(ponto);
+  return original.slice(0, MAX_NOME - extensao.length) + extensao;
+}
+
 export function filenameFromUrl(url) {
   let pathname;
   try {

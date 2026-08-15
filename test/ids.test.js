@@ -1,6 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { shortcodeToId, shortcodeFromUrl, filenameFromUrl } from "../src/lib/ids.js";
+import {
+  shortcodeToId,
+  shortcodeFromUrl,
+  filenameFromUrl,
+  filenameFor,
+} from "../src/lib/ids.js";
 
 test("shortcodeToId converte shortcode conhecido", () => {
   assert.equal(shortcodeToId("B"), "1");
@@ -30,4 +35,21 @@ test("filenameFromUrl limpa query string", () => {
 
 test("filenameFromUrl devolve null sem extensao reconhecivel", () => {
   assert.equal(filenameFromUrl("https://scontent.cdninstagram.com/v/t51/"), null);
+});
+
+test("filenameFor encurta nome gigante do CDN mantendo a extensao", () => {
+  const gigante = "A".repeat(120) + ".mp4";
+  const nome = filenameFor(`https://scontent.fbcdn.net/o1/v/t2/f2/m412/${gigante}`, "video", 111);
+  assert.ok(nome.length <= 64, `nome ficou com ${nome.length} caracteres`);
+  assert.ok(nome.endsWith(".mp4"));
+});
+
+test("filenameFor mantem nome curto intacto", () => {
+  const url = "https://scontent.cdninstagram.com/v/t51/473738383_1122334455_n.jpg?stp=x";
+  assert.equal(filenameFor(url, "image", 111), "473738383_1122334455_n.jpg");
+});
+
+test("filenameFor usa extensao do tipo quando a url nao tem nome", () => {
+  assert.equal(filenameFor("https://scontent.fbcdn.net/o1/v/t2/", "video", 111), "sp3_111.mp4");
+  assert.equal(filenameFor("https://scontent.fbcdn.net/o1/v/t2/", "image", 111), "sp3_111.jpg");
 });
