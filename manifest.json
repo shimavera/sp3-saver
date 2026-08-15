@@ -17,8 +17,13 @@
     {
       "matches": ["https://www.instagram.com/*"],
       "js": ["src/content.js"],
-      "type": "module",
       "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/main.js", "src/resolver.js", "src/ui/button.js", "src/lib/*.js"],
+      "matches": ["https://www.instagram.com/*"]
     }
   ]
 }
