@@ -17,3 +17,18 @@ npm test
 
 Os testes cobrem a lógica pura (`src/lib/`). O comportamento na página é
 validado manualmente — veja `docs/teste-manual.md`.
+
+## Quando parar de funcionar
+
+O Instagram muda estrutura com frequência. O resolver tenta, nesta ordem:
+endpoint interno → leitura do DOM → erro visível no botão.
+
+- Botão vermelho em tudo: o endpoint mudou. Conferir no console da página o
+  status de `/api/v1/media/<id>/info/`.
+- Botão não aparece: a detecção de container mudou. Ajustar `scan()` em
+  `src/content.js`.
+
+## Escopo
+
+Uso pessoal, instalação descompactada. Não vai para a Chrome Web Store —
+extensão de download do Instagram costuma ser rejeitada por lá.
