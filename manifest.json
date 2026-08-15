@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "IG Saver",
+  "version": "0.1.0",
+  "description": "Baixa foto, video, carrossel, story e destaque do Instagram com um clique.",
+  "permissions": ["downloads"],
+  "host_permissions": [
+    "https://www.instagram.com/*",
+    "https://*.cdninstagram.com/*",
+    "https://*.fbcdn.net/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.instagram.com/*"],
+      "js": ["src/content.js"],
+      "type": "module",
+      "run_at": "document_idle"
+    }
+  ]
+}
