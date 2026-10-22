@@ -1,6 +1,6 @@
 # Story: baixar vídeo do Instagram reproduzível no macOS
 
-**Status:** In Progress
+**Status:** Done
 **Tipo:** bug-fix
 **Data:** 2026-10-22
 
@@ -43,4 +43,9 @@ manual.
 
 - `npm test`: 21 testes aprovados.
 - `node --check` e `git diff --check`: aprovados.
-- Validação do download pela extensão atualizada no Chrome: pendente.
+- Após recarregar a extensão e atualizar a aba do reel, o botão salvou um MP4 de
+  330.182 bytes, H.264 720 × 1280, AAC e duração de 6,429 s.
+- O SHA-256 do arquivo baixado pelo SP3 Saver é idêntico ao arquivo de comparação
+  do SaveClip. O novo arquivo abriu e reproduziu no QuickTime.
+- A aba do Instagram precisa ser atualizada após recarregar a extensão; o
+  content script anterior permanece ativo na aba já aberta.

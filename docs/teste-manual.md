@@ -1,7 +1,8 @@
 # Roteiro de teste manual
 
 Rodar depois de qualquer mudança no content script ou no resolver.
-Recarregar a extensão em `chrome://extensions` antes de começar.
+Recarregar a extensão em `chrome://extensions` e depois atualizar a aba do
+Instagram antes de começar. Uma aba já aberta mantém o content script antigo.
 
 | # | Caso | Passo | Esperado |
 |---|---|---|---|
