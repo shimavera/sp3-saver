@@ -1,12 +1,13 @@
 # Roteiro de teste manual
 
 Rodar depois de qualquer mudança no content script ou no resolver.
-Recarregar a extensão em `chrome://extensions` antes de começar.
+Recarregar a extensão em `chrome://extensions` e depois atualizar a aba do
+Instagram antes de começar. Uma aba já aberta mantém o content script antigo.
 
 | # | Caso | Passo | Esperado |
 |---|---|---|---|
 | 1 | Post de foto | Abrir post, passar o mouse, clicar | `.jpg` no Downloads, nome do CDN |
-| 2 | Reel / vídeo | Abrir reel, clicar | `.mp4` no Downloads |
+| 2 | Reel / vídeo | Abrir reel, clicar | `.mp4` no Downloads; `ffprobe` mostra H.264 e áudio AAC quando disponível; QuickTime abre o arquivo |
 | 3 | Carrossel — slide | Ir para o slide 3, clicar | badge mostra `3/N`, baixa só o slide 3 |
 | 4 | Carrossel — todos | Clicar em "todos" | N arquivos, um por slide |
 | 5 | Story foto | Abrir story de foto, clicar | imagem no Downloads |
@@ -30,5 +31,9 @@ const r = await fetch("https://www.instagram.com/api/v1/media/317492993101955403
 console.log(r.status);
 ```
 
-`200` = camada 1 saudável. `401`/`403` = a extensão vai cair no plano B do DOM
-(só foto) e mostrar erro em vídeo.
+`200` = camada 1 saudável. Se o endpoint devolver HTML ou falhar, a extensão
+procura a versão progressiva em `video_versions` nos dados da própria página,
+conferindo o shortcode do post. Um MP4 DASH carregado pelo player pode conter
+somente VP9 sem áudio e não serve como arquivo final. URLs de áudio, `blob:` e
+posters não são tratados como vídeo. Sem arquivo completo disponível, o botão
+mostra erro em vez de salvar mídia incompatível ou a imagem de capa.
